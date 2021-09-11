@@ -21,7 +21,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 //@SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-@ComponentScan(basePackages = {"com.pingan.cn.*","com.pingan.cn.supermap.*" })
+//@ComponentScan(basePackages = {"com.pingan.cn.*","com.pingan.cn.supermap.*" })
+@ComponentScan(basePackages = {"com.pingan.cn.*","com.pingan.cn.guanqu.*" })
 public class PinganApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
