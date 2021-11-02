@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,9 @@ import java.util.Optional;
 public class TangbaService {
     @Autowired
     private TangbaDao actionDao;
+
+    @Autowired
+    private ShuiweiService shuiweiService;
 
     public Tangba saveAction(Tangba person){
         Tangba save = null;
@@ -46,6 +50,29 @@ public class TangbaService {
 
     public List<Tangba> findAll(){
         return actionDao.findAll();
+    }
+
+    public List<TangbaVo> findAllWithShuiwei(){
+        List<Tangba> lists = actionDao.findAll();
+        List<TangbaVo> result = new ArrayList<>();
+        for (int i=0;i<lists.size();i++){
+            String num = lists.get(i).getNum();
+            Shuiwei shui = shuiweiService.findBySTNum(num);
+
+            Tangba tangba = lists.get(i);
+            TangbaVo vo = new TangbaVo();
+            vo.setShuiwei(shui);
+            vo.setArea(tangba.getArea());
+            vo.setGate(tangba.getGate());
+            vo.setId(tangba.getId());
+            vo.setMax_water(tangba.getMax_water());
+            vo.setName(tangba.getName());
+            vo.setNum(tangba.getNum());
+            vo.setPosition(tangba.getPosition());
+
+            result.add(vo);
+        }
+        return result;
     }
 
     public Tangba findById(String id){

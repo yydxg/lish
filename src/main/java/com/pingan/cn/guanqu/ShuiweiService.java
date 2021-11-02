@@ -6,14 +6,17 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service("shuiweiService")
 public class ShuiweiService {
     @Autowired
     private ShuiweiDao actionDao;
+    private static String dateFormat = "yyyy-MM-dd HH:mm:ss";
+    private static SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 
     public Shuiwei saveAction(Shuiwei person){
         Shuiwei save = null;
@@ -50,6 +53,50 @@ public class ShuiweiService {
 
     public Shuiwei findById(String id){
         return actionDao.findById(id).get();
+    }
+
+    public Shuiwei findBySTNum(String STnum){
+        List<Shuiwei> lists = actionDao.findBySTNum(STnum);
+        //降序
+        List<Shuiwei> collect = lists.stream().sorted(new Comparator<Shuiwei>() {
+            @Override
+            public int compare(Shuiwei o1, Shuiwei o2) {
+                try {
+                    Date d1 = sdf.parse(o1.getDate());
+                    Date d2 = sdf.parse(o2.getDate());
+                    return d2.compareTo(d1);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        }).collect(Collectors.toList());
+        if(collect.size()>0){
+            return collect.get(0);
+        }else {
+            return null;
+        }
+    }
+
+    public Shuiwei findCurrent(){
+        List<Shuiwei> actions = findAll();
+        //降序
+        List<Shuiwei> collect = actions.stream().sorted(new Comparator<Shuiwei>() {
+            @Override
+            public int compare(Shuiwei o1, Shuiwei o2) {
+                try {
+                    Date d1 = sdf.parse(o1.getDate());
+                    Date d2 = sdf.parse(o2.getDate());
+                    return d2.compareTo(d1);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return 0;
+            }
+        }).collect(Collectors.toList());
+
+        System.out.println(Arrays.toString(actions.toArray()));
+        return collect.get(0);
     }
 
     public boolean deleteById(String id){

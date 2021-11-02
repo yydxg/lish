@@ -60,4 +60,11 @@ public class ShuikuController {
         boolean action = actionService.deleteBatch(ids);
         return ResponseUtil.builder().success(true).data(action).build();
     }
+
+    @ApiOperation(value = "findAllWithShuiwei")
+    @GetMapping(value = "/findAllWithShuiwei")
+    public ResponseUtil findAllWithShuiwei(){
+        List<ShuikuVo> actionsList = actionService.findAllWithShuiwei();
+        return ResponseUtil.builder().success(true).data(actionsList).build();
+    }
 }

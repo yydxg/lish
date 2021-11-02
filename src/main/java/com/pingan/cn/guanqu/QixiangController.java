@@ -60,4 +60,11 @@ public class QixiangController {
         boolean action = actionService.deleteBatch(ids);
         return ResponseUtil.builder().success(true).data(action).build();
     }
+
+    @ApiOperation(value = "findCurrent")
+    @GetMapping(value = "/findCurrent")
+    public @ResponseBody ResponseUtil findCurrent(){
+        Qixiang action = actionService.findCurrent();
+        return ResponseUtil.builder().success(true).data(action).build();
+    }
 }

@@ -28,6 +28,7 @@ public class Shuiku {
     @GenericGenerator(name = "idGenerator", strategy = "uuid2")
     @GeneratedValue(generator = "idGenerator")
     private String id;
+    private String num;
     private String name;
     private String position;
     private String area;

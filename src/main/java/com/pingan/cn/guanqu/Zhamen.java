@@ -26,7 +26,9 @@ public class Zhamen {
     @GenericGenerator(name = "idGenerator", strategy = "uuid2")
     @GeneratedValue(generator = "idGenerator")
     private String id;
-    private String module;
+    private String num;
+    private String position;
+    private String sk_num; // 所属水库的编号
     private String flow_velocity;
 
 

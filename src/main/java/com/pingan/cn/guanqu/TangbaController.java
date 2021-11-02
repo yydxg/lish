@@ -40,6 +40,13 @@ public class TangbaController {
         return ResponseUtil.builder().success(true).data(actionsList).build();
     }
 
+    @ApiOperation(value = "findAllWithShuiwei")
+    @GetMapping(value = "/findAllWithShuiwei")
+    public ResponseUtil findAllWithShuiwei(){
+        List<TangbaVo> actionsList = actionService.findAllWithShuiwei();
+        return ResponseUtil.builder().success(true).data(actionsList).build();
+    }
+
     @ApiOperation(value = "findById/{id}")
     @GetMapping(value = "/findById/{id}")
     public @ResponseBody ResponseUtil findById(@PathVariable String id){

@@ -15,6 +15,9 @@ public class ShuikuService {
     @Autowired
     private ShuikuDao actionDao;
 
+    @Autowired
+    private ShuiweiService shuiweiService;
+
     public Shuiku saveAction(Shuiku person){
         Shuiku save = null;
         try {
@@ -47,6 +50,30 @@ public class ShuikuService {
     public List<Shuiku> findAll(){
         return actionDao.findAll();
     }
+
+    public List<ShuikuVo> findAllWithShuiwei(){
+        List<Shuiku> lists = actionDao.findAll();
+        List<ShuikuVo> result = new ArrayList<>();
+        for (int i=0;i<lists.size();i++){
+            String num = lists.get(i).getNum();
+            Shuiwei shui = shuiweiService.findBySTNum(num);
+
+            Shuiku tangba = lists.get(i);
+            ShuikuVo vo = new ShuikuVo();
+            vo.setShuiwei(shui);
+            vo.setArea(tangba.getArea());
+            vo.setGate(tangba.getGate());
+            vo.setId(tangba.getId());
+            vo.setMax_water(tangba.getMax_water());
+            vo.setName(tangba.getName());
+            vo.setNum(tangba.getNum());
+            vo.setPosition(tangba.getPosition());
+
+            result.add(vo);
+        }
+        return result;
+    }
+
 
     public Shuiku findById(String id){
         return actionDao.findById(id).get();

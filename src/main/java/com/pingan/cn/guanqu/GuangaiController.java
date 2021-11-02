@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "灌溉")
 @RestController
@@ -58,6 +59,13 @@ public class GuangaiController {
     @PostMapping(value = "/deleteBatch")
     public @ResponseBody ResponseUtil deleteBatch(@RequestBody String[] ids){
         boolean action = actionService.deleteBatch(ids);
+        return ResponseUtil.builder().success(true).data(action).build();
+    }
+
+    @ApiOperation(value = "findCurrent")
+    @GetMapping(value = "/findCurrent")
+    public @ResponseBody ResponseUtil findCurrent(){
+        Map<String,Guangai> action = actionService.findCurrent();
         return ResponseUtil.builder().success(true).data(action).build();
     }
 }

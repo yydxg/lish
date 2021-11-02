@@ -6,14 +6,17 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service("guangaiService")
 public class GuangaiService {
     @Autowired
     private GuangaiDao actionDao;
+    private static String dateFormat = "yyyy-MM-dd HH:mm:ss";
+    private static SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 
     public Guangai saveAction(Guangai person){
         Guangai save = null;
@@ -77,5 +80,32 @@ public class GuangaiService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public Map<String,Guangai> findCurrent(){
+        List<Guangai> actions = findAll();
+
+        Map<String, List<Guangai>> collects = actions.stream().collect(Collectors.groupingBy(Guangai::getType));
+        Map<String,Guangai> resutMap = new HashMap<>();
+
+        for (String key : collects.keySet()) {
+            System.out.println("key= "+ key + " and value= " + collects.get(key));
+            //降序
+            List<Guangai> collect = collects.get(key).stream().sorted(new Comparator<Guangai>() {
+                @Override
+                public int compare(Guangai o1, Guangai o2) {
+                    try {
+                        Date d1 = sdf.parse(o1.getDate());
+                        Date d2 = sdf.parse(o2.getDate());
+                        return d2.compareTo(d1);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    return 0;
+                }
+            }).collect(Collectors.toList());
+            resutMap.put(key,collect.get(0));
+        }
+        return resutMap;
     }
 }

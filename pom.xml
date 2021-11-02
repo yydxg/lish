@@ -99,6 +99,12 @@
 			<version>1.2.53</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.fusesource.jansi/jansi，控制台颜色输出 -->
+		<dependency>
+			<groupId>org.fusesource.jansi</groupId>
+			<artifactId>jansi</artifactId>
+			<version>2.3.4</version>
+		</dependency>
 
 		<!-- 热部署模块 -->
 		<dependency>
@@ -223,10 +229,12 @@
 	<build>
 		<finalName>backend</finalName>
 		<plugins>
+			<!-- 打包springboot jpa项目 -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -243,6 +251,7 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 

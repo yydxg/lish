@@ -47,6 +47,13 @@ public class ShuiweiController {
         return ResponseUtil.builder().success(true).data(action).build();
     }
 
+    @ApiOperation(value = "findBySTNum/{STnum}")
+    @GetMapping(value = "/findBySTNum/{STnum}")
+    public @ResponseBody ResponseUtil findBySTNum(@PathVariable String STnum){
+        Shuiwei action = actionService.findBySTNum(STnum);
+        return ResponseUtil.builder().success(true).data(action).build();
+    }
+
     @ApiOperation(value = "deleteById/{id}")
     @GetMapping(value = "/deleteById/{id}")
     public @ResponseBody ResponseUtil deleteById(@PathVariable String id){
@@ -58,6 +65,13 @@ public class ShuiweiController {
     @PostMapping(value = "/deleteBatch")
     public @ResponseBody ResponseUtil deleteBatch(@RequestBody String[] ids){
         boolean action = actionService.deleteBatch(ids);
+        return ResponseUtil.builder().success(true).data(action).build();
+    }
+
+    @ApiOperation(value = "findCurrent")
+    @GetMapping(value = "/findCurrent")
+    public @ResponseBody ResponseUtil findCurrent(){
+        Shuiwei action = actionService.findCurrent();
         return ResponseUtil.builder().success(true).data(action).build();
     }
 }

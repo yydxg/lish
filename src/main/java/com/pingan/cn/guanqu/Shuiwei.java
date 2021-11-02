@@ -27,7 +27,7 @@ public class Shuiwei {
     @GeneratedValue(generator = "idGenerator")
     private String id;
     private String date;
-    private String s_t_id;
+    private String s_t_num;
     private String water_level;
     private String time_input;
 }
