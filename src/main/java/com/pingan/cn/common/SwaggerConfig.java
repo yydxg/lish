@@ -20,7 +20,9 @@ public class SwaggerConfig {
             return new Docket(DocumentationType.SWAGGER_2)
                     .apiInfo(apiInfo())
                     .select()
-                    .apis(RequestHandlerSelectors.basePackage("com.pingan.cn.guanqu"))
+                    .apis(RequestHandlerSelectors.basePackage("com.pingan.cn.controller"))
+//                    .apis(RequestHandlerSelectors.basePackage("com.pingan.cn.ningbomap.controller"))
+//                    .apis(RequestHandlerSelectors.basePackage("com.pingan.cn.guanqu"))
 //                    .apis(RequestHandlerSelectors.basePackage("com.pingan.cn.supermap"))
                     .paths(PathSelectors.any())
                     .build();
