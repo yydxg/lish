@@ -153,7 +153,7 @@
 		<dependency>
 			<groupId>edu.ucar</groupId>
 			<artifactId>netcdf</artifactId>
-			<version>4.2-min</version>
+			<version>4.3.22</version>
 		</dependency>
 
 		<!-- geotools模块 -->

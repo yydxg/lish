@@ -86,8 +86,8 @@ public class ParseService {
         int hourOffset = 3;
         ParseService.parseAtomsFlow(NC_PATH,rootPath,timeAlias,uAlias,vAlias,lonAlias,latAlias,hourOffset);*/
 
-        /*String NC_PATH = "E:/web_work2/nc_project/bigdata/ocean_bhd/1980/19800101_ocean_bhd.nc";
-        String rootPath = "E:/web_work2/nc_project/ncjson/ocean_bhd/flow/";
+        String NC_PATH = "E:/web_work2/nc_project/bigdata/ocean_scs/1980/19800101_ocean_scs.nc";
+        String rootPath = "E:/web_work2/nc_project/ncjson/ocean_scs/flow/";
         String timeAlias = "time";
         String levAlias = "lev";
         String uAlias = "u";
@@ -97,29 +97,31 @@ public class ParseService {
         String vLonAlias = "lon_v";
         String vLatAlias = "lat_v";
         int hourOffset = 3;
-        ParseService.parseOceanFlow(NC_PATH,rootPath,timeAlias,levAlias,uAlias,vAlias,uLonAlias,uLatAlias,vLonAlias,vLatAlias,hourOffset);*/
+        ParseService.parseOceanFlow(NC_PATH,rootPath,timeAlias,levAlias,uAlias,vAlias,uLonAlias,uLatAlias,vLonAlias,vLatAlias,hourOffset);
 
-/*        String NC_PATH =  "E:/web_work2/nc_project/bigdata/ocean_bhd/1980/19800101_ocean_bhd.nc";
-         String rootPath = "E:/web_work2/nc_project/ncjson/ocean_bhd/static/ssh";
+//        String NC_PATH =  "E:/web_work2/nc_project/bigdata/ocean_scs/1980/19800101_ocean_scs.nc";
+//         String rootPath = "E:/web_work2/nc_project/ncjson/ocean_scs/static/ssh";
 //        String NC_PATH =  "E:\\web_work2\\nc_project\\bigdata\\wave\\198001_wave_cs.nc";
-//        String rootPath = "E:/web_work2/nc_project/ncjson/wave_cs/static/whs";
-//        String NC_PATH =  "E:\\web_work2\\nc_project\\bigdata\\atoms\\198102_atmos_cs.nc";
-//        String rootPath = "E:/web_work2/nc_project/ncjson/atmos_cs/static/t2m";
+//        String rootPath = "E:/web_work2/nc_project/ncjson/wave_cs/static/zerop";
+        /*String NC_PATH =  "E:\\web_work2\\nc_project\\bigdata\\atoms\\198102_atmos_cs.nc";
+        String rootPath = "E:/web_work2/nc_project/ncjson/atmos_cs/static/t2m";
         String timeAlias = "time";
-        String typeAlias = "ssh";
-        String lonAlias = "lon_r";
-        String latAlias = "lat_r";
+        String typeAlias = "t2m";
+        String lonAlias = "lon";
+        String latAlias = "lat";
         int hourOffset = 3;
         int latOffset = 2;
         int lonOffset = 2;
         ParseService.parse_3d_static(NC_PATH,rootPath,timeAlias,typeAlias,lonAlias,latAlias,latOffset,lonOffset,hourOffset);*/
 
 
- /*       String NC_PATH = "E:\\web_work2\\nc_project\\bigdata\\ocean_bhd\\1980\\19800101_ocean_bhd.nc";
-        String rootPath = "E:/web_work2/nc_project/ncjson/ocean_bhd/static/temp";
+//        String NC_PATH = "E:\\web_work2\\nc_project\\bigdata\\ocean_bhd\\1980\\19800101_ocean_bhd.nc";
+//        String rootPath = "E:/web_work2/nc_project/ncjson/ocean_bhd/static/temp";
+        /*String NC_PATH = "E:\\web_work2\\nc_project\\bigdata\\ocean_scs\\1980\\19800101_ocean_scs.nc";
+        String rootPath = "E:/web_work2/nc_project/ncjson/ocean_scs/static/salt";
         String startYear = "1980/01/01-0000";
         String timeAlias = "time";
-        String typeAlias = "temp";
+        String typeAlias = "salt";
         String levAlias = "lev";
         String lonAlias = "lon_r";
         String latAlias = "lat_r";
@@ -141,7 +143,7 @@ public class ParseService {
         int sliceNum = 1;
         ParseService.parse_3d_static_bigdata(NC_PATH,rootPath,year,typeAlias,lonAlias,latAlias,latOffset,lonOffset,hourOffset,sliceNum);*/
 
-        String U_NC_PATH = "E:/web_work2/nc_project/bigdata2/bigdata_atm1990_u10.nc";
+        /*String U_NC_PATH = "E:/web_work2/nc_project/bigdata2/bigdata_atm1990_u10.nc";
         String V_NC_PATH = "E:/web_work2/nc_project/bigdata2/bigdata_atm1990_v10.nc";
         String rootPath = "E:/web_work2/nc_project/ncjson/bigdata_atm/flow/";
         String startYear = "1990/01/01-0000";
@@ -153,10 +155,10 @@ public class ParseService {
         int latOffset = 2;
         int lonOffset = 2;
         ParseService.parse_3d_flow_bigdata(U_NC_PATH,V_NC_PATH,rootPath,startYear,uAlias,
-                vAlias,lonAlias,latAlias,latOffset,lonOffset,hourOffset);
+                vAlias,lonAlias,latAlias,latOffset,lonOffset,hourOffset);*/
 
         /*String NC_PATH =  "E:\\web_work2\\nc_project\\bigdata2\\ww3_LMN_1992.nc";
-        String rootPath = "E:/web_work2/nc_project/ncjson/ww3_LMN_1992/static/LMN";
+        String rootPath = "E:/web_work2/nc_project/ncjson/ww3_LMN/static/LMN";
         String year = "1990/01/01-0000";
         String typeAlias = "LMN";
         int hourOffset = 3;
@@ -321,7 +323,7 @@ public class ParseService {
                                 System.out.println(val2);
                                 System.out.println(val3);
                             }*/
-                            if(!Double.isNaN(val)){
+                            if(!Double.isNaN(val) && (val != 32767 * scale_factor)){
                                 Map<String, Object> featuremap = new HashMap<>();
                                 Map<String, Object> propertiesmap = new HashMap<>();
                                 Map<String, Object> geometrymap = new HashMap<>();
@@ -448,7 +450,7 @@ public class ParseService {
                                 double lonValue = (float)lonArray.get(k);
 //                                lonValue=(double)(Math.round(lonValue*1000)/1000);
                                 float val = typeData.getFloat(typeIndex.set(j,k));
-                                if(!Double.isNaN(val)){
+                                if(!Double.isNaN(val) && (val != 32767)){
                                     Map<String, Object> featuremap = new HashMap<>();
                                     Map<String, Object> propertiesmap = new HashMap<>();
                                     Map<String, Object> geometrymap = new HashMap<>();
@@ -557,7 +559,7 @@ public class ParseService {
                                 double lonValue = startLon + k * jiangeLon;
 //                                lonValue= (double) (Math.round(lonValue*1000)/1000);
                                 float val = typeData.getFloat(typeIndex.set(j,k));
-                                if(!Double.isNaN(val)){
+                                if(!Double.isNaN(val) && (val != 32767)){
                                     Map<String, Object> featuremap = new HashMap<>();
                                     Map<String, Object> propertiesmap = new HashMap<>();
                                     Map<String, Object> geometrymap = new HashMap<>();
@@ -623,7 +625,7 @@ public class ParseService {
                                        String lonAlias,String latAlias,Integer latOffset,Integer lonOffset,Integer hourOffset){
         NetcdfFile ncfile = null;
         String long_name = "",units = "";
-        double scale_factor = 0;
+        double scale_factor = 0,add_offset=0;
 
         try {
             ncfile = NetcdfFile.open(NC_PATH);
@@ -650,6 +652,9 @@ public class ParseService {
                 }
                 if("scale_factor".equals(typeAttr.getName())){
                     scale_factor = typeAttr.getValues().getDouble(0);
+                }
+                if("add_offset".equals(typeAttr.getName())){
+                    add_offset = typeAttr.getValues().getDouble(0);
                 }
             }
 
@@ -678,12 +683,12 @@ public class ParseService {
                             for (int k = 0; k < uShape[3]; k = k + lonOffset) { //经度
                                 float lonValue = (float) lonArray.get(k);
                                 double val = typeData.getDouble(typeIndex.set(i, realLevIndex[lNum], j, k)) * scale_factor;
-                                if(!Double.isNaN(val)) {
+                                if(!Double.isNaN(val) && (val != 32767 * scale_factor)) {
                                     Map<String, Object> featuremap = new HashMap<>();
                                     Map<String, Object> propertiesmap = new HashMap<>();
                                     Map<String, Object> geometrymap = new HashMap<>();
                                     featuremap.put("type", "Feature");
-                                    propertiesmap.put("v", val);
+                                    propertiesmap.put("v", val + add_offset);
                                     featuremap.put("properties", propertiesmap);
                                     geometrymap.put("type", "Point");
                                     geometrymap.put("coordinates", new Float[]{lonValue, latValue});
@@ -823,12 +828,28 @@ public class ParseService {
                         int levValue = (int)lveArray.get(realLevIndex[lNum]);
                         java.util.ArrayList uArrs = new ArrayList<>();
                         java.util.ArrayList vArrs = new ArrayList<>();
-                        for (int j = 0; j < uShape[2]-1; j++) {
-                            for (int k = 0; k < uShape[3]-1; k++) {
-                                uArrs.add(uData.getDouble(uIndex.set(i, realLevIndex[lNum], j, k)) * u_scale_factor);
-                                vArrs.add(vData.getDouble(vIndex.set(i, realLevIndex[lNum], j, k)) * v_scale_factor);
+                        for (int j = uShape[2]-1; j > -1; j--) { // 纬度
+                            for (int k = 0; k < uShape[3]; k++) { // 经度
+                                if((uData.getDouble(uIndex.set(i, realLevIndex[lNum], j, k)) != 32767)){
+                                    uArrs.add(uData.getDouble(uIndex.set(i, realLevIndex[lNum], j, k)) * u_scale_factor);
+//                                    vArrs.add(vData.getDouble(vIndex.set(i, realLevIndex[lNum], j, k)) * v_scale_factor);
+                                }else {
+                                    uArrs.add(0);
+//                                    vArrs.add(0);
+                                }
                             }
                         }
+
+                        for (int j = vShape[2]-1; j > -1; j--) { // 纬度
+                            for (int k = 0; k < vShape[3]; k++) { // 经度
+                                if((vData.getDouble(vIndex.set(i, realLevIndex[lNum], j, k)) != 32767)){
+                                    vArrs.add(vData.getDouble(vIndex.set(i, realLevIndex[lNum], j, k)) * v_scale_factor);
+                                }else {
+                                    vArrs.add(0);
+                                }
+                            }
+                        }
+
                         //构造UV JSON对象
                         List<Object> uvlist = new ArrayList<Object>();
                         Map<String, Object> umap = new HashMap<>();

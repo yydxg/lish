@@ -68,7 +68,7 @@ public class PrjWeilanService {
         try {
             PrjWeilan entity = new PrjWeilan();
             org.geolatte.geom.Polygon polygon = (org.geolatte.geom.Polygon) Wkt.fromWkt("SRID=4326;POLYGON ((30 10, 10 20, 20 40, 40 40, 30 10))");
-            entity.setGeometry(polygon);
+//            entity.setGeometry(polygon);
             return actionDao.save(entity);
         }catch (Exception e){
             e.printStackTrace();

@@ -24,7 +24,9 @@ public class PrjWeilan{
 //     @JsonIgnoreProperties({"fundamentalUnit"})
 //    @Type(type = "org.hibernate.spatial.GeometryType")
 //    @Column(columnDefinition = "GEOGRAPHY(POLYGON)")
-    @JsonIgnore
+
+    // mysql 库下注释
+   /* @JsonIgnore
     @Column(name = "geometry", columnDefinition = "geometry(Polygon,4326)")
-    private Polygon geometry;
+    private Polygon geometry;*/
 }
