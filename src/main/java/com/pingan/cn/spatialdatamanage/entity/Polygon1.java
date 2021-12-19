@@ -1,7 +1,6 @@
-package com.pingan.cn.ningbomap.entity;
+package com.pingan.cn.spatialdatamanage.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,21 +11,19 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "prj_weilan")
+@Table(name = "polygon1")
 @NoArgsConstructor
 @AllArgsConstructor
-public class PrjWeilan{
+public class Polygon1 {
     @Id
     @GenericGenerator(name = "idGenerator", strategy = "uuid2")
     @GeneratedValue(generator = "idGenerator")
     private String id;
     private String num;
-//     @JsonIgnoreProperties({"fundamentalUnit"})
-//    @Type(type = "org.hibernate.spatial.GeometryType")
-//    @Column(columnDefinition = "GEOGRAPHY(POLYGON)")
+    private String others;
 
     // mysql 库下注释
-/*    @JsonIgnore
+    @JsonIgnore
     @Column(name = "geometry", columnDefinition = "geometry(Polygon,4326)")
-    private Polygon geometry;*/
+    private Polygon geometry;
 }

@@ -32,9 +32,9 @@ import java.util.Map;
 @EnableSwagger2
 @SpringBootApplication
 //@SpringBootApplication(exclude={DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
-@ComponentScan(basePackages = {"com.pingan.cn.*","com.pingan.cn.supermap" })
+//@ComponentScan(basePackages = {"com.pingan.cn.*","com.pingan.cn.supermap" })
 //@ComponentScan(basePackages = {"com.pingan.cn.*","com.pingan.cn.ningbomap.*","com.pingan.cn.guanqu" })
-//@ComponentScan(basePackages = {"com.pingan.cn.ningbomap.*" })
+@ComponentScan(basePackages = {"com.pingan.cn.spatialdatamanage.*" })
 @Component
 public class PinganApplication extends SpringBootServletInitializer {
 

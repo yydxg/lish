@@ -1,32 +1,33 @@
-package com.pingan.cn.ningbomap.entity;
+package com.pingan.cn.spatialdatamanage.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.geolatte.geom.Polygon;
+import org.geolatte.geom.Point;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "prj_weilan")
+@Table(name = "lineString1")
 @NoArgsConstructor
 @AllArgsConstructor
-public class PrjWeilan{
+public class LineString1 {
     @Id
     @GenericGenerator(name = "idGenerator", strategy = "uuid2")
     @GeneratedValue(generator = "idGenerator")
     private String id;
     private String num;
+    private String others;
 //     @JsonIgnoreProperties({"fundamentalUnit"})
 //    @Type(type = "org.hibernate.spatial.GeometryType")
 //    @Column(columnDefinition = "GEOGRAPHY(POLYGON)")
 
     // mysql 库下注释
-/*    @JsonIgnore
-    @Column(name = "geometry", columnDefinition = "geometry(Polygon,4326)")
-    private Polygon geometry;*/
+    @JsonIgnore
+    @Column(name = "geometry", columnDefinition = "geometry(LineString,4326)")
+    private org.geolatte.geom.LineString geometry;
+//    private Polygon geometry;
 }
